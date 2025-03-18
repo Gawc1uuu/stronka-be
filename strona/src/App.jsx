@@ -1,8 +1,12 @@
+import Navbar from "./components/Navbar"
 
 function App() {
 
   return (
-    <h1 className='text-7xl text-red-500'>elo</h1>
+    <>
+    <Navbar />
+    <h1 className="text-7xl text-red-500 mt-20">elo</h1>
+    </>
   )
 }
 
