@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
   
         {/* Middle row with logo, address, contact info */}
-        <div className="bg-white py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start text-gray-700">
+        <div className=" bg-gray-100 py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start text-gray-700">
           {/* Logo area */}
           <div className="mb-6 md:mb-0">
             <img
