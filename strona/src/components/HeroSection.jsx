@@ -1,4 +1,4 @@
-import BgImage from "../assets/elo.JPG";
+import BgImage from "../assets/IMG_1923.JPG";
 
 function HeroSection() {
   return (

@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import Logo from "../assets/logo_renocare.svg";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,24 +8,19 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // If the user has scrolled down at all, set `hasScrolled` to true
-      if (window.scrollY > 0) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
+      setHasScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Cleanup listener on unmount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
       className={`
-        fixed top-0 left-0 w-full z-50 transition-colors duration-300
-        ${hasScrolled ? "bg-white shadow-md" : "bg-transparent"}
+        fixed top-0 left-0 w-full z-50 transition-colors duration-300 
+        bg-white
+        ${hasScrolled ? "md:bg-white md:shadow-md" : "md:bg-transparent"}
       `}
     >
       <div className="md:max-w-7xl px-6 mx-auto">
@@ -32,11 +28,11 @@ function Navbar() {
           {/* Logo */}
           <div
             className={`
-              text-2xl font-bold transition-colors duration-300
+              text-2xl font-bold transition-colors duration-300 
               ${hasScrolled ? "text-gray-800" : "text-white"}
             `}
           >
-            MyLogo
+            <img src={Logo} alt="Renocare" />
           </div>
 
           {/* Desktop Links */}
@@ -59,7 +55,7 @@ function Navbar() {
           <button
             className={`
               md:hidden transition-colors duration-300
-              ${hasScrolled ? "text-gray-800" : "text-white"}
+              ${hasScrolled ?? "text-gray-800" }
             `}
             onClick={() => setIsOpen(!isOpen)}
           >
@@ -70,12 +66,7 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div
-          className={`
-            md:hidden text-center transition-colors duration-300
-            ${hasScrolled ? "bg-white shadow-md" : "bg-transparent"}
-          `}
-        >
+        <div className="md:hidden text-center transition-colors duration-300 bg-white shadow-md">
           {["Home", "About", "Services", "Contact"].map((link) => (
             <div
               key={link}
@@ -83,10 +74,7 @@ function Navbar() {
             >
               <a
                 href="#"
-                className={`
-                  block transition-colors duration-300
-                  ${hasScrolled ? "text-gray-600" : "text-white"}
-                `}
+                className="block transition-colors duration-300 text-gray-600"
               >
                 {link}
               </a>
