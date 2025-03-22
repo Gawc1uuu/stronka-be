@@ -1,12 +1,12 @@
 // ServicesGrid.jsx
-import React from 'react';
 import { motion } from 'framer-motion';
-import photo from '../assets/IMG_1924.JPG';
-import photo1 from '../assets/IMG_1920.JPG';
-import photo2 from '../assets/IMG_1926.JPG';
-import photo3 from '../assets/IMG_1930.JPG';
+import photo from '../../assets/IMG_1924.JPG';
+import photo1 from '../../assets/IMG_1920.JPG';
+import photo2 from '../../assets/IMG_1926.JPG';
+import photo3 from '../../assets/IMG_1930.JPG';
 
 export default function ServicesGrid() {
+  console.log(motion);
   // Array of service data for convenience
   const services = [
     { image: photo, title: 'Dakwerken' },
@@ -17,7 +17,8 @@ export default function ServicesGrid() {
 
   return (
     <section className="bg-gray-100 py-12 min-h-[70vh]">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mt-4 mb-8 text-gray-800">Our Services</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-center mt-4 text-gray-800">Onze diensten</h2>
+      <div className="w-16 h-1 bg-[#ACB939] mt-2 mx-auto mb-10" />
 
       <div className="max-w-[80%] mx-auto px-6">
         {/* One column on mobile, two on md screens */}

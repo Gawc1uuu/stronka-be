@@ -1,22 +1,33 @@
-import CenteredHeaderImageLeft from "./components/CenteredHeaderImageLeft"
-import Footer from "./components/Footer"
-import HeroSection from "./components/HeroSection"
-import Navbar from "./components/Navbar"
-import ServicesGrid from "./components/ServicesGrid"
-import TextLeftImageRight from "./components/TextLeftImageRight"
-import "./App.css"
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Roofs from './pages/Roofs';
+import './App.css';
+import Widening from './pages/Widening';
+import Renovations from './pages/Renovations';
+import Realizations from './pages/Realizations';
+import Finishing from './pages/Finishing';
+import Contact from './pages/Contact';
 
 function App() {
   return (
-    <div className="font-montserrat">
-    <Navbar />
-    <HeroSection/>
-    <TextLeftImageRight/>
-    <CenteredHeaderImageLeft/>
-    <ServicesGrid/>
-    <Footer/>
+    <div className="font-montserrat bg-gray-100">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dakwerken" element={<Roofs />} />
+          <Route path="/uitbreiding" element={<Widening />} />
+          <Route path="/totaalrenovatie" element={<Renovations />} />
+          <Route path="/interieurrenovatie" element={<Finishing />} />
+          <Route path="/realisaties" element={<Realizations />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

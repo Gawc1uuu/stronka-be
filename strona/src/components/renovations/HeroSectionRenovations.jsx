@@ -1,7 +1,7 @@
-import BgImage from '../assets/home-cover.png';
+import BgImage from '../../assets/IMG_1919.JPG';
 import Typewriter from 'typewriter-effect';
 
-function HeroSection() {
+function HeroSectionRenovations() {
   return (
     <section
       className="relative w-full h-screen bg-cover bg-center flex items-center justify-center pt-16"
@@ -14,11 +14,8 @@ function HeroSection() {
           <Typewriter
             options={{
               strings: [
+                `<span style="text-transform: uppercase; color: white;">Totaalrenovatie</span>`,
                 `<span style="text-transform: uppercase; color: #ACB939;">RENO</span><span style="text-transform: uppercase; color: black;">CARE</span>`,
-                `<span style="text-transform: uppercase; color: white;">Dakwerken</span>`,
-                `<span style="text-transform: uppercase; color:white;">Uitbreiding</span>`,
-                `<span style="text-transform: uppercase; color:white;">Totaalrenovatie</span>`,
-                `<span style="text-transform: uppercase; color: white;">Interieurrenovatie</span>`,
               ],
 
               autoStart: true,
@@ -35,4 +32,4 @@ function HeroSection() {
   );
 }
 
-export default HeroSection;
+export default HeroSectionRenovations;

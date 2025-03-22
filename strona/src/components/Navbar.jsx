@@ -1,21 +1,42 @@
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo_renocare.svg';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false); // Mobile menu toggle
   const [hasScrolled, setHasScrolled] = useState(false);
-  // Track which desktop link (if any) is currently open
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  // Get current location from React Router
+  const location = useLocation();
+
   const mainLinks = [
-    { label: 'Home', subLinks: [] },
+    {
+      label: 'Home',
+      path: '/',
+      subLinks: [],
+    },
     {
       label: 'Onze diensten',
-      subLinks: ['Dakwerken', 'Uitbreiding', 'Totaalrenovatie', 'Interieurrenovatie'],
+      path: '/onze-diensten',
+      subLinks: [
+        { label: 'Dakwerken', path: '/dakwerken' },
+        { label: 'Uitbreiding', path: '/uitbreiding' },
+        { label: 'Totaalrenovatie', path: '/totaalrenovatie' },
+        { label: 'Interieurrenovatie', path: '/interieurrenovatie' },
+      ],
     },
-    { label: 'Realisaties', subLinks: [] },
-    { label: 'Contact', subLinks: [] },
+    {
+      label: 'Realisaties',
+      path: '/realisaties',
+      subLinks: [],
+    },
+    {
+      label: 'Contact',
+      path: '/contact',
+      subLinks: [],
+    },
   ];
 
   useEffect(() => {
@@ -31,6 +52,18 @@ function Navbar() {
     setActiveDropdown(prev => (prev === index ? null : index));
   };
 
+  // Close all dropdowns (and mobile menu if desired)
+  const closeAllMenus = () => {
+    setActiveDropdown(null);
+    setIsOpen(false); // close mobile menu as well
+  };
+
+  // Helper to see if a given link is "active"
+  const isLinkActive = path => {
+    // You can fine-tune matching logic, e.g. exact match or "startsWith"
+    return location.pathname === path;
+  };
+
   return (
     <nav
       className={`
@@ -44,11 +77,18 @@ function Navbar() {
           {/* Logo */}
           <div
             className={`
-              text-2xl font-bold transition-colors duration-300 
+              text-2xl font-bold transition-colors duration-300
               ${hasScrolled ? 'text-gray-800' : 'text-white'}
             `}
           >
-            <img src={Logo} alt="Renocare" />
+            <Link
+              to="/"
+              onClick={() => {
+                closeAllMenus();
+              }}
+            >
+              <img src={Logo} alt="Renocare" />
+            </Link>
           </div>
 
           {/* Desktop Links */}
@@ -56,28 +96,39 @@ function Navbar() {
             {mainLinks.map((link, index) => {
               const hasSubs = link.subLinks && link.subLinks.length > 0;
               const isDropdownOpen = activeDropdown === index;
+              const isActive = isLinkActive(link.path); // check main link
 
               return (
                 <div key={link.label} className="relative">
-                  {/* Main link (button or anchor) */}
-                  <button
-                    onClick={() => (hasSubs ? toggleDropdown(index) : null)}
+                  {/* Main link */}
+                  <Link
+                    to={link.path}
                     className={`
                       transition-colors duration-300 text-base md:text-xl
                       flex items-center cursor-pointer
                       ${hasScrolled ? 'text-gray-600 hover:text-[#ACB939]' : 'text-white hover:text-[#ACB939]'}
+                      ${isActive ? 'text-[#ACB939]!' : ''}
                     `}
+                    onClick={e => {
+                      // If this link has sub-links,
+                      // prevent navigation and toggle dropdown instead
+                      if (hasSubs) {
+                        e.preventDefault();
+                        toggleDropdown(index);
+                      } else {
+                        closeAllMenus();
+                      }
+                    }}
                   >
                     {link.label}
-                    {/* Arrow only if subLinks exist */}
                     {hasSubs && (
                       <ChevronDown
                         className={`ml-1 h-5 w-5 transform transition-transform ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
                       />
                     )}
-                  </button>
+                  </Link>
 
-                  {/* If subLinks exist, show/hide them */}
+                  {/* If subLinks exist, show/hide them on desktop */}
                   {hasSubs && (
                     <div
                       className={`
@@ -85,17 +136,27 @@ function Navbar() {
                         ${isDropdownOpen ? 'block' : 'hidden'}
                       `}
                     >
-                      {link.subLinks.map(subLink => (
-                        <a
-                          key={subLink}
-                          href="#"
-                          className="block px-4 py-2 text-gray-600 
-                                     hover:text-[#ACB939] cursor-pointer
-                                     hover:bg-gray-50 transition-colors duration-300"
-                        >
-                          {subLink}
-                        </a>
-                      ))}
+                      {link.subLinks.map(subLink => {
+                        const isSubActive = isLinkActive(subLink.path);
+                        return (
+                          <Link
+                            key={subLink.label}
+                            to={subLink.path}
+                            className={`
+                              block px-4 py-2 text-gray-600
+                              hover:text-[#ACB939] cursor-pointer
+                              hover:bg-gray-50 transition-colors duration-300
+                              ${isSubActive ? 'text-[#ACB939]!' : ''}
+                            `}
+                            onClick={() => {
+                              // Close dropdown after clicking subLink
+                              closeAllMenus();
+                            }}
+                          >
+                            {subLink.label}
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -123,24 +184,29 @@ function Navbar() {
           {mainLinks.map((link, index) => {
             const hasSubs = link.subLinks && link.subLinks.length > 0;
             const isDropdownOpen = activeDropdown === index;
+            const isActive = isLinkActive(link.path);
 
             return (
               <div key={link.label} className="py-3 px-4 hover:bg-gray-50 transition-colors duration-300 text-left">
                 {/* Main link for mobile */}
                 <div className="flex items-center justify-between">
-                  <a
-                    href="#"
-                    className="block transition-colors duration-300 text-gray-600 text-base cursor-pointer hover:text-[#ACB939]"
+                  <Link
+                    to={link.path}
+                    className={`
+                      block transition-colors duration-300 text-gray-600 text-base cursor-pointer hover:text-[#ACB939]
+                      ${isActive ? 'underline underline-offset-4 decoration-2' : ''}
+                    `}
                     onClick={e => {
-                      // If link has sub-links, prevent default to open dropdown
                       if (hasSubs) {
                         e.preventDefault();
                         toggleDropdown(index);
+                      } else {
+                        closeAllMenus();
                       }
                     }}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                   {hasSubs && (
                     <button onClick={() => toggleDropdown(index)} className="text-gray-600 hover:text-[#ACB939] cursor-pointer">
                       <ChevronDown className={`h-5 w-5 transform transition-transform ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
@@ -151,16 +217,26 @@ function Navbar() {
                 {/* Sub-links for mobile */}
                 {hasSubs && isDropdownOpen && (
                   <div className="mt-2 pl-4">
-                    {link.subLinks.map(subLink => (
-                      <a
-                        key={subLink}
-                        href="#"
-                        className="block py-2 text-gray-600 cursor-pointer 
-                                   hover:text-[#ACB939] transition-colors duration-300"
-                      >
-                        {subLink}
-                      </a>
-                    ))}
+                    {link.subLinks.map(subLink => {
+                      const isSubActive = isLinkActive(subLink.path);
+                      return (
+                        <Link
+                          key={subLink.label}
+                          to={subLink.path}
+                          className={`
+                            block py-2 text-gray-600 cursor-pointer 
+                            hover:text-[#ACB939] transition-colors duration-300
+                            ${isSubActive ? 'underline underline-offset-4 decoration-2' : ''}
+                          `}
+                          onClick={() => {
+                            // Close everything after clicking subLink
+                            closeAllMenus();
+                          }}
+                        >
+                          {subLink.label}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>

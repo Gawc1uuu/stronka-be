@@ -1,8 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import photo from '../assets/IMG_1920.JPG';
+import photo from '../../assets/IMG_1920.JPG';
 
 export default function CenteredHeaderImageLeft() {
+  console.log(motion);
+
   return (
     <section className="w-full py-12 bg-gray-100">
       {/* Header with bottom border */}

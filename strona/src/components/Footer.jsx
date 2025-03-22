@@ -1,5 +1,7 @@
 // Footer.jsx
 import Logo from '../assets/logo_renocare.svg';
+// 1) Import desired icons
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 export default function Footer() {
   return (
@@ -56,10 +58,35 @@ export default function Footer() {
             info@renocare.be
           </a>
         </div>
+
+        {/* Social Media Icons */}
+        <div className="mt-6 md:mt-0">
+          <h3 className="font-semibold mb-2 text-lg">Volg Ons</h3>
+          <div className="flex items-center justify-center md:justify-start gap-4">
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/profile.php?id=100070373473102"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-[#ACB939] transition-colors duration-200"
+            >
+              <FaFacebookF className="w-6 h-6" />
+            </a>
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/_renocare_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-[#ACB939] transition-colors duration-200"
+            >
+              <FaInstagram className="w-6 h-6" />
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="bg-gray-900 text-gray-100 text-center py-2">created by Gawc1uuu & Seba</div>
+      <div className="bg-gray-900 text-gray-100 text-center py-2">created by Gawc1uuu &amp; Seba</div>
     </footer>
   );
 }
