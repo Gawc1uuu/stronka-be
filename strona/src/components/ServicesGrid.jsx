@@ -1,65 +1,41 @@
 // ServicesGrid.jsx
-import photo from "../assets/IMG_1931.JPG";
+import React from 'react';
+import { motion } from 'framer-motion';
+import photo from '../assets/IMG_1924.JPG';
+import photo1 from '../assets/IMG_1920.JPG';
+import photo2 from '../assets/IMG_1926.JPG';
+import photo3 from '../assets/IMG_1930.JPG';
 
 export default function ServicesGrid() {
+  // Array of service data for convenience
+  const services = [
+    { image: photo, title: 'Dakwerken' },
+    { image: photo1, title: 'Uitbreiding' },
+    { image: photo2, title: 'Totaalrenovatie' },
+    { image: photo3, title: 'Interieurrenovatie' },
+  ];
+
   return (
-    <section className="h-[70vh] bg-gray-100 flex flex-col py-12">
-      {/* Heading at the top within the half-screen container */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center mt-4 mb-2 text-gray-800">
-        Our Services
-      </h2>
+    <section className="bg-gray-100 py-12 min-h-[70vh]">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mt-4 mb-8 text-gray-800">Our Services</h2>
 
-      {/* This div expands to fill remaining vertical space */}
-      <div className="flex-1 w-full max-w-7xl mx-auto">
-        {/* Grid that fills its parent’s height */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 h-full gap-6 px-6">
-          {/* Card 1 */}
-          <div className="relative overflow-hidden group h-full">
-            <img
-              src={photo}
-              alt="Roofs"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 w-full text-white p-4 bg-gradient-to-t from-black/60 to-transparent">
-              <h3 className="text-xl font-semibold">We build roofs</h3>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="relative overflow-hidden group h-full">
-            <img
-              src={photo}
-              alt="Windows"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 w-full text-white p-4 bg-gradient-to-t from-black/60 to-transparent">
-              <h3 className="text-xl font-semibold">Window Fitting</h3>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="relative overflow-hidden group h-full">
-            <img
-              src={photo}
-              alt="Exteriors"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 w-full text-white p-4 bg-gradient-to-t from-black/60 to-transparent">
-              <h3 className="text-xl font-semibold">Exterior Work</h3>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="relative overflow-hidden group h-full">
-            <img
-              src={photo}
-              alt="Interiors"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 w-full text-white p-4 bg-gradient-to-t from-black/60 to-transparent">
-              <h3 className="text-xl font-semibold">Interior Renovation</h3>
-            </div>
-          </div>
+      <div className="max-w-[80%] mx-auto px-6">
+        {/* One column on mobile, two on md screens */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              className="flex flex-col items-center"
+              // Framer Motion props
+              initial={{ y: 50, opacity: 0 }} // start slightly below & invisible
+              whileInView={{ y: 0, opacity: 1 }} // animate upward & fade in
+              viewport={{ once: true, amount: 0.2 }} // trigger once 20% of this element is visible
+              transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
+            >
+              <img src={service.image} alt={service.title} className="w-full h-auto rounded-md shadow-md" />
+              <h3 className="mt-4 text-2xl font-semibold text-gray-800">{service.title}</h3>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
