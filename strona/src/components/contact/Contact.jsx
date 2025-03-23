@@ -15,7 +15,7 @@ const Contact = () => {
   console.log(motion);
 
   return (
-    <section className="w-full h-[80vh] bg-gray-100 flex items-center justify-center">
+    <section className="w-full h-screen bg-gray-100 flex items-center justify-center my-40">
       <div className="w-full">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
           <motion.h2
