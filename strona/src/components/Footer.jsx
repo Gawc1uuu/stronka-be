@@ -86,7 +86,9 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="bg-gray-900 text-gray-100 text-center py-2">created by Gawc1uuu &amp; Seba</div>
+      <div className="bg-gray-900 text-gray-100 text-center py-2">
+        created by <a href="https://github.com/Gawc1uuu">Gawc1uuu</a> &amp; <a href="https://github.com/SebastianCK">Seba</a>
+      </div>
     </footer>
   );
 }
