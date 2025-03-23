@@ -30,7 +30,7 @@ const Contact = () => {
           <motion.form
             ref={formRef}
             onSubmit={handleSubmit}
-            action="https://formsubmit.co/test" // Replace with your email endpoint
+            action="https://formsubmit.co/info@renocare.be" // Replace with your email endpoint
             method="POST"
             className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg"
             initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ const Contact = () => {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
             {/* Optional hidden fields */}
-            <input type="hidden" name="_next" value="http://localhost:5173" />
+            <input type="hidden" name="_next" value="https://renocare.be" />
             <input type="hidden" name="_captcha" value="false" />
 
             {/* Naam */}
