@@ -1,5 +1,6 @@
 import BgImage from '../../assets/home-cover.png';
 import Typewriter from 'typewriter-effect';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -27,9 +28,12 @@ function HeroSection() {
             }}
           />
         </h1>
-
         <p className="text-3xl">If you care for quality...</p>
-        <button className="mt-6 px-6 py-3 bg-[#ACB939] hover:bg-[#acb939cd] text-white text-lg rounded-lg">Gratis Offerte</button>
+        <Link to="/contact">
+          <button className="cursor-pointer mt-6 px-6 py-3 bg-[#ACB939] hover:bg-[#acb939cd] text-white text-lg rounded-lg">
+            Gratis Offerte
+          </button>
+        </Link>{' '}
       </div>
     </section>
   );

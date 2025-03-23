@@ -1,8 +1,8 @@
-import BgImage from '../../assets/roof.png';
+import BgImage from '../../assets/gevel.png';
 import Typewriter from 'typewriter-effect';
 import { Link } from 'react-router-dom';
 
-function HeroSectionRoofs() {
+function HeroSectionRealizations() {
   return (
     <section
       className="relative w-full h-screen bg-cover bg-center flex items-center justify-center pt-16"
@@ -15,7 +15,7 @@ function HeroSectionRoofs() {
           <Typewriter
             options={{
               strings: [
-                `<span style="text-transform: uppercase; color: white;">Dakwerken</span>`,
+                `<span style="text-transform: uppercase; color: white;">Realisaties</span>`,
                 `<span style="text-transform: uppercase; color: #ACB939;">RENO</span><span style="text-transform: uppercase; color: black;">CARE</span>`,
               ],
 
@@ -36,4 +36,4 @@ function HeroSectionRoofs() {
   );
 }
 
-export default HeroSectionRoofs;
+export default HeroSectionRealizations;

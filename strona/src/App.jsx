@@ -8,7 +8,7 @@ import Widening from './pages/Widening';
 import Renovations from './pages/Renovations';
 import Realizations from './pages/Realizations';
 import Finishing from './pages/Finishing';
-import Contact from './pages/Contact';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/totaalrenovatie" element={<Renovations />} />
           <Route path="/interieurrenovatie" element={<Finishing />} />
           <Route path="/realisaties" element={<Realizations />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

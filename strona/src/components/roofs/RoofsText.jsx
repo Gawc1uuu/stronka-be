@@ -44,8 +44,8 @@ const RoofsText = () => {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <p>
-            Kwaliteitsvolle materialen Hoewel we zelf geen materialen verkopen, werken we wél samen met betrouwbare leveranciers en
-            producenten. Zo kunnen we garant staan voor een lange levensduur en een feilloze afwerking van jouw dak.
+            We werken samen met betrouwbare leveranciers en gebruiken kwaliteitsvolle materialen. Zo kunnen we garant staan voor een lange
+            levensduur en een feilloze afwerking van jouw dak.
           </p>
         </motion.div>
         <motion.div
