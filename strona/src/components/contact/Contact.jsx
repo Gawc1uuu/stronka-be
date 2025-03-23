@@ -3,29 +3,13 @@ import { motion } from 'framer-motion';
 
 const Contact = () => {
   const formRef = useRef();
-
-  // Create state for each input field
-  const [name, setName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const [feedback] = useState('');
 
-  const sendEmail = e => {
-    e.preventDefault();
-
-    // For now, simply log the form data.
-    console.log('Naam:', name);
-    console.log('Voornaam:', firstName);
-    console.log('Telefoonnummer:', phone);
-    console.log('Email:', email);
-    console.log('Bericht:', message);
-
-    // Here you can add your email sending logic (e.g., EmailJS)
-    // After sending, you can reset the states and show feedback:
-    // setFeedback('Bericht succesvol verzonden!');
-    // setName(''); setFirstName(''); setPhone(''); setEmail(''); setMessage('');
+  // onSubmit handler that sets the loading state.
+  // Since the form submits normally, the page will navigate away.
+  const handleSubmit = () => {
+    setLoading(true);
   };
 
   console.log(motion);
@@ -45,13 +29,19 @@ const Contact = () => {
           </motion.h2>
           <motion.form
             ref={formRef}
-            onSubmit={sendEmail}
+            onSubmit={handleSubmit}
+            action="https://formsubmit.co/test" // Replace with your email endpoint
+            method="POST"
             className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
+            {/* Optional hidden fields */}
+            <input type="hidden" name="_next" value="http://localhost:5173" />
+            <input type="hidden" name="_captcha" value="false" />
+
             {/* Naam */}
             <div className="mb-4">
               <label className="block text-gray-800 mb-2" htmlFor="name">
@@ -61,8 +51,6 @@ const Contact = () => {
                 type="text"
                 name="name"
                 id="name"
-                value={name}
-                onChange={e => setName(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ACB939]"
               />
@@ -76,8 +64,6 @@ const Contact = () => {
                 type="text"
                 name="firstName"
                 id="firstName"
-                value={firstName}
-                onChange={e => setFirstName(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ACB939]"
               />
@@ -91,8 +77,6 @@ const Contact = () => {
                 type="tel"
                 name="phone"
                 id="phone"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ACB939]"
               />
@@ -106,8 +90,6 @@ const Contact = () => {
                 type="email"
                 name="email"
                 id="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ACB939]"
               />
@@ -121,8 +103,6 @@ const Contact = () => {
                 name="message"
                 id="message"
                 rows="5"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ACB939]"
               ></textarea>
@@ -130,9 +110,12 @@ const Contact = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="px-6 py-3 bg-[#ACB939] text-white text-lg rounded-lg hover:bg-[#ACB939] transition-colors duration-300"
+                disabled={loading}
+                className={`px-6 py-3 text-white text-lg rounded-lg transition-colors duration-300 cursor-pointer ${
+                  loading ? 'bg-gray-500' : 'bg-[#ACB939] hover:bg-[#91b637] active:scale-95'
+                }`}
               >
-                Verzend Bericht
+                {loading ? 'Verzenden...' : 'Verzend Bericht'}
               </button>
             </div>
             {feedback && <p className="mt-4 text-center text-lg text-gray-800">{feedback}</p>}
