@@ -11,7 +11,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="relative text-center text-white px-6">
-        <h1 className="text-5xl md:text-7xl font-bold mb-10">
+        <h1 className="text-3xl md:text-7xl font-bold mb-10">
           <Typewriter
             options={{
               strings: [
@@ -28,7 +28,7 @@ function HeroSection() {
             }}
           />
         </h1>
-        <p className="text-3xl">If you care for quality...</p>
+        <p className="text-2xl md:text-3xl">If you care for quality...</p>
         <Link to="/contact">
           <button className="cursor-pointer mt-6 px-6 py-3 bg-[#ACB939] hover:bg-[#acb939cd] text-white text-lg rounded-lg">
             Gratis Offerte

@@ -9,11 +9,13 @@ import Renovations from './pages/Renovations';
 import Realizations from './pages/Realizations';
 import Finishing from './pages/Finishing';
 import ContactPage from './pages/ContactPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <div className="font-montserrat bg-gray-100">
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
