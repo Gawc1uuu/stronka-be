@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import photo from '../../assets/IMG_1927.JPG';
+import { Link } from 'react-router-dom';
 
 export default function TextLeftImageRight() {
   console.log(motion);
@@ -41,12 +42,14 @@ export default function TextLeftImageRight() {
               met ons op voor advies en een vrijblijvende offerte!
             </span>
           </p>
-          <button
-            className="bg-[#ACB939] text-white font-semibold px-6 py-2 rounded-md
+          <Link to="/contact">
+            <button
+              className="bg-[#ACB939] text-white font-semibold px-6 py-2 rounded-md
                        hover:bg-[#ACB939]/90 transition-colors duration-300 cursor-pointer"
-          >
-            Contacteer ons
-          </button>
+            >
+              Contacteer ons
+            </button>
+          </Link>
         </motion.div>
 
         {/* Right column - image */}
