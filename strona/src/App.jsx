@@ -1,6 +1,6 @@
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Roofs from './pages/Roofs';
 import './App.css';
@@ -14,7 +14,7 @@ import ScrollToTop from './components/ScrollToTop';
 function App() {
   return (
     <div className="font-montserrat bg-gray-100">
-      <BrowserRouter>
+      <Router>
         <ScrollToTop />
         <Navbar />
         <Routes>
@@ -27,7 +27,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
